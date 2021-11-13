@@ -1,18 +1,85 @@
-from flask import Flask, request, Response
+<html> 
 
-app = Flask(__name__)
+<head> 
 
+</head> 
 
+<body style="font-family: Arial, Helvetica, sans-serif; color:#333"> 
 
-@app.route("/")
-def hello():
-    user = request.args.get('user')
-    password = request.args.get('password')
-    if (user == 'atlanticomedio') and (password == '1234'):
-        return Response( "BIENVENIDO SEAS A NUESTRA SECTA" , status=200)
-    else:
-        return Response("TU ACCESO HA SIDO DENEGADO, LA AUTODESTRUCCIÓN COMENZARÁ EN 3, 2, 1... ¡¡¡¡BOOOOOMMMM!!!" , status=401)
+    <div id="login" style="border-style: solid; border-color: #333; border-width: 2px; border-radius: 3px; padding: 10px; width:600px;"> 
 
-if __name__ == '__main__':
-     app.run(port='5000')
+        <p>Login</p>         
 
+        <br/><br/> Your user name:<br/> 
+
+        <input type="text" id="email" size="35"placeholder="your email address"> 
+
+        <br/> <br/>Password:<br/> 
+
+        <input type="password" id="password" size="35" placeholder="your email address"> 
+
+        <br/> 
+
+        <input type="button" value="Login" style="margin:20px" onclick="login(email.value, password.value)"> 
+
+    </div> 
+
+    <div id="results"></div> 
+
+                   
+
+    <script> 
+
+        function login( email, password) { 
+
+             
+
+            document.getElementById("results").innerHTML = "Logging in..." 
+
+            const baseURL = "https://carlix.herokuapp.com/" 
+
+            var xhttp = new XMLHttpRequest(); 
+
+            xhttp.onreadystatechange = function() { 
+
+                if (this.readyState == 4 && this.status == 200) { 
+
+                   // Typical action to be performed when the document is ready: 
+
+                  document.getElementById("results").innerHTML = xhttp.responseText; 
+
+                }else{ 
+
+                  document.getElementById("results").innerHTML = 'Error: ' + xhttp.responseText; 
+
+                } 
+
+            }; 
+
+            xhttp.open("GET", baseURL + '?user=' + email + '&password=' +password, true); 
+
+            xhttp.send(); 
+
+                 
+
+          
+
+        } 
+
+         
+
+         
+
+        // This just shows the URL as the user types 
+
+        function showURL(value){ 
+
+            document.getElementById("url").innerHTML="https://app.itmplatform.com/" + value; 
+
+        } 
+
+    </script> 
+
+</body> 
+
+</html> 
